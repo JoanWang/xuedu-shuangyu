@@ -1,0 +1,45 @@
+<div id="content-header">
+    <img src="/images/show_settings.png" alt="Schools" />
+  <h1><%= t 'School' %></h1>
+  <h3><%= t 'Manage_compuse' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to t('New'), new_school_path%> </li>
+
+  </ul>
+</div>
+
+
+<div id="page-yield">
+
+    <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+
+    <% unless flash[:warn_notice].nil? %>
+    <div id="errorExplanation" class="errorExplanation"><%= flash[:warn_notice] %> </div>
+  <% end %>
+
+ <div class="box">
+   <h4 align="center"><%= t 'School' %></h4>
+
+<ul id="category-list">
+
+    <% @schools.each do |school| %>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="category-name"><%= link_to school.full_name, school %></div>
+        <div class="category-edit"><%= link_to t('Edit'), edit_school_path(school) if permitted_to? :edit, :schools %></div>
+        <div class="category-delete"><%= link_to(t('Delete'), school_path(school), :method => 'delete', :confirm => t('Are_you_sure')) if permitted_to? :destroy, :schools %></div>
+      </li>
+     <% end %>
+
+</ul>
+  <div class="extender"></div>
+  </div>
+</div>

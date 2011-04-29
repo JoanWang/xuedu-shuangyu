@@ -1,0 +1,12 @@
+
+<h4 align="center"><%= t 'Active_classrooms'%></h4>
+
+<ul id="category-list">
+
+    <% @classroom.each do |classroom| %>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="category-name"><%= link_to classroom.full_name, [classroom.school, classroom] %></div>
+      </li>
+     <% end %>
+
+</ul>

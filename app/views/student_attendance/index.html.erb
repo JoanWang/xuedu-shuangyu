@@ -1,0 +1,55 @@
+
+<div id="content-header">
+  <img src="/images/attendence/attendence.png" />
+  <h1><%= t 'Attendance' %></h1>
+  <h3><%= t 'Home' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="box">
+    <% if @current_user.admin? %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t("Attendance_register"), :controller => 'attendances', :action => 'index'  %></div>
+        <div class="link-descr"><%= t 'Attendance_descript' %></div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t("Attendance_report"), :controller => "attendance_reports", :action => "index" %></div>
+        <div class="link-descr"><%= t 'Attendance_report_des' %></div>
+      </div>
+    <% else %>
+
+      <% if permitted_to? :index, :attendances %>
+        <div class="link-box">
+          <div class="link-heading"><%= link_to t("Attendance_register"), :controller => 'attendances', :action => 'index'  %></div>
+          <div class="link-descr"><%= t 'Attendance_descript' %></div>
+        </div>
+      <% end %>
+
+      <% if permitted_to? :index, :attendance_reports or permitted_to? :index, :attendances %>
+        <div class="link-box">
+          <div class="link-heading"><%= link_to t("Attendance_report"), :controller => "attendance_reports", :action => "index" %></div>
+          <div class="link-descr"><%= t 'Attendance_report_des' %></div>
+        </div>
+      <% end %>
+    <% end %>
+    <!--
+       <div class="link-box">
+           <div class="link-heading"><%= link_to t("Attendance_report"), :controller => "attendance_reports", :action => "advance_search" %></div>
+           <div class="link-descr">Attendance report for students</div>
+         </div>
+    -->
+
+    <div class="extender"></div>
+  </div>
+
+
+</div>

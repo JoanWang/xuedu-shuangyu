@@ -1,0 +1,22 @@
+
+<div id="grading-levels-form">
+  <h4><%= @batch.full_name unless @batch.nil? %></h4>
+
+  <% form_remote_for @grading_level do |f| %>
+
+<div id="form-errors"></div>
+
+  <div class="label-field-pair">
+    <%= f.label :name %>
+    <div class="input-container"> <%= f.text_field :name %></div>
+  </div>
+
+    <div class="label-field-pair">
+    <%= f.label :min_score, '此等级最低分' %>
+    <div class="input-container"> <%= f.text_field :min_score %></div>
+   </div>
+
+    <%= submit_tag "", :value => "► 保存", :class => "submit_button" %>
+
+  <% end %>
+</div>

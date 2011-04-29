@@ -1,0 +1,76 @@
+
+<div id="content-header">
+  <img src="/images/show_settings.png" />
+  <h1><%= t 'Cfg.Configuration' %></h1>
+  <h3><%= t 'Cfg.Configuration_home' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="box">
+
+    <% if permitted_to? :create, :courses %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Cfg.Manage_Courses_Batches'), courses_path %></div>
+        <div class="link-descr"><%= t 'Cfg.Add_Course_Batche' %></div>
+      </div>
+    <% end %>
+
+    <% if permitted_to? :settings, :configuration %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Cfg.Manage_student_categories'), :controller => "student", :action => "categories" %></div>
+        <div class="link-descr"><%= t 'Cfg.Add_student_category' %></div>
+      </div>
+    <% end %>
+    <% if permitted_to? :index, :subjects %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Cfg.Manage_subjects'), subjects_path %></div>
+        <div class="link-descr"><%= t 'Cfg.Manage_subjects_courses' %></div>
+      </div>
+    <% end %>
+
+    <% if permitted_to? :settings, :configuration %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Cfg.General_settings'), :action => "settings" %></div>
+        <div class="link-descr"><%= t 'Cfg.Set_some_general_configurations' %></div>
+      </div>
+    <% end %>
+
+    <% if permitted_to? :settings, :configuration %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Cfg.Add_admission_additional_details'), :controller=>"student", :action => "add_additional_details" %></div>
+        <div class="link-descr"><%= t 'Cfg.Set_additional_for_admission' %></div>
+      </div>
+    <% end %>
+
+    <% if permitted_to? :index, :sms %>
+      <% @config = Configuration.available_modules %>
+      <% if @config.include?('SMS') %>
+        <div class="link-box">
+          <div class="link-heading"><%= link_to t('Cfg.SMS_Module'), :controller=>"sms", :action => "index" %></div>
+          <div class="link-descr"><%= t 'Cfg.Enable_Disable_SMS_settings' %></div>
+        </div>
+      <% end %>
+    <% end %>
+
+    <!-- 校区 -->
+    <% if permitted_to? :index, :sms %>
+      <% @config = Configuration.available_modules %>
+      <% if @config.include?('Compus') %>
+        <div class="link-box">
+          <div class="link-heading"><%= link_to t('Cfg.Manage_Campus_Classroom'), schools_path %></div>
+          <div class="link-descr"><%= t 'Cfg.Create_Campus_Classroom' %></div>
+        </div>
+      <% end %>
+    <% end %>
+    </div>
+
+
+  </div>

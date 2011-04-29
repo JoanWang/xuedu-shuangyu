@@ -1,0 +1,48 @@
+
+<ul class="category-list">
+  <% unless @categories.empty? %>
+    <li class="heading">不扣除</li>
+    <%- @categories.each do |c| -%>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="category-name"><%= c.name %></div>
+        <div class="category-edit"><%= link_to t("Edit"), {:action => "edit_category", :id=>c.id} %></div>
+        <div class="category-edit"><%= link_to t("Delete"), {:action => "delete_category", :id=>c.id}, :confirm => "Are you sure?" %></div>
+        <% unless c.status == false %>
+          <div class="category-edit"><%= link_to_remote t("Inactivate"), :url => {:action => "inactivate_category", :id => c.id},
+              :confirm=>"你确定要禁用此类别吗?",
+              :update => "category-list" %></div>
+          <% else %>
+          <div class="category-edit"><%= link_to_remote t("Activate"), :url => {:action => "activate_category", :id => c.id},
+              :confirm=>"你确定要激活此类别吗?",
+              :update => "category-list" %></div>
+          <% end %>
+      </li>
+    <% end %>
+  <% else %>
+    <p class="flash-msg"> 没有员工工资不扣除类别相关记录.</p>
+  <% end %>
+</ul>
+
+<ul class="category-list">
+  <% unless @deductionable_categories.empty? %>
+    <li class="heading">扣除</li>
+    <%- @deductionable_categories.each do |c| -%>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="category-name"><%= c.name %></div>
+        <div class="category-edit"><%= link_to t("Edit"), {:action => "edit_category", :id=>c.id} %></div>
+        <div class="category-edit"><%= link_to t("Delete"), {:action => "delete_category", :id=>c.id}, :confirm => "Are you sure?" %></div>
+        <% unless c.status == false %>
+          <div class="category-edit"><%= link_to_remote t("Inactivate"), :url => {:action => "inactivate_category", :id => c.id},
+              :confirm=>"你确定要禁用此类别吗?",
+              :update => "category-list" %></div>
+          <% else %>
+          <div class="category-edit"><%= link_to_remote t("Activate"), :url => {:action => "activate_category", :id => c.id},
+              :confirm=>"你确定要激活此类别吗?",
+              :update => "category-list" %></div>
+          <% end %>
+      </li>
+    <% end %>
+  <% else %>
+    <p class="flash-msg"> 没有员工工资可扣除类别相关记录.</p>
+  <% end %>
+</ul>

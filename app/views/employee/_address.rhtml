@@ -1,0 +1,69 @@
+<div id="new_profile_info_top">
+  <div class="profile_info_label_top"><%= tt('employee.home_address') %></div>
+  <div class="profile_info_text_top"><%= @employee.home_address_line1 %></div>
+
+  <div class="profile_info_label_top2">&nbsp;</div>
+  <div class="profile_info_text_top2"><%= @employee.home_address_line2 %></div>
+
+  <div class="profile_info_label_top"><%= tt('employee.home_city') %></div>
+  <div class="profile_info_text_top"><%= @employee.home_city %></div>
+
+</div>
+
+
+<div class="new_profile_info_area1">
+  <div class="profile_info_label_top2"><%= tt('employee.home_state') %></div>
+  <div class="profile_info_text_top2"> <%= @employee.home_state %> </div>
+
+  <div class="profile_info_label_top"><%= tt('employee.home_country_id') %></div>
+  <div class="profile_info_text_top"> <%= @home_country %> </div>
+
+</div>
+
+<div class="new_profile_info_area1">
+  <div class="profile_info_label_top2"><%= tt('employee.home_pin_code') %></div>
+  <div class="profile_info_text_top2"> <%=  @employee.home_pin_code %> </div>
+
+  <div class="profile_info_label_top"></div>
+  <div class="profile_info_text_top"></div>
+</div>
+
+<div class="new_profile_info_area1">
+  <div class="profile_info_label_top2"><%= tt('employee.office_address') %></div>
+  <div class="profile_info_text_top2"><%=  @employee.office_address_line1 %></div>
+
+  <div class="profile_info_label_top">&nbsp;</div>
+  <div class="profile_info_text_top"><%= @employee.office_address_line2 %></div>
+</div>
+
+<div class="new_profile_info_area1">
+  <div class="profile_info_label_top2"><%= tt('employee.office_city') %></div>
+  <div class="profile_info_text_top2"> <%=  @employee.office_city %> </div>
+
+  <div class="profile_info_label_top"><%= tt('employee.office_state') %></div>
+  <div class="profile_info_text_top"><%= @employee.office_state %></div>
+</div>
+
+<div class="new_profile_info_area1">
+  <div class="profile_info_label_top2"><%= tt('employee.office_country_id') %></div>
+  <div class="profile_info_text_top2"> <%=  @office_country %> </div>
+
+  <div class="profile_info_label_top"><%= tt('employee.office_pin_code') %></div>
+  <div class="profile_info_text_top"><%= @employee.office_pin_code %></div>
+</div>
+
+
+<div class="extender"></div>
+<div class="edit-pdf-group">
+  <%if permitted_to? :edit2,:employee%>
+    <div class="edit">
+      <%= link_to "► 编辑",  :controller => "employee", :action => "edit2", :id =>@employee.id %>
+    </div>
+  <%end%>
+  <% if permitted_to?  :profile_pdf , :employee %>
+  <div class="pdf">
+    <%= link_to " ► PDF报告",
+      {:controller => "employee", :action => "profile_pdf", :id => @employee.id},:target => '_blank', :class=> 'user_button' %>
+  </div>
+  <% end %>
+</div>

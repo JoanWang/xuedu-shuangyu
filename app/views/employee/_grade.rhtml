@@ -1,0 +1,15 @@
+
+<ul id="grade-list">
+  <% unless @grades.empty? %>
+    <li class="heading"> 等级名称 </li>
+    <% @grades.each do |g| %>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="grade-name"><%= g.name %>(<%= g.priority %>)</div>
+        <div class="grade-edit"><%= link_to t("Edit"), :action => "edit_grade", :id=>g.id %></div>
+        <div class="grade-edit"><%= link_to t("Delete"), {:action => "delete_grade", :id=>g.id}, :confirm => t("Are_you_sure") %></div>
+      </li>
+    <% end %>
+  <% else %>
+    <p class="flash-msg"> 没有找到员工等级记录.</p>
+  <% end %>
+</ul>

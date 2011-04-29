@@ -1,0 +1,15 @@
+<ul class="leave-type-list">
+<% unless @leave_types.empty? %>
+  <li class="heading"> <%= t 'Leave_type' %></li>
+    <%- @leave_types.each do |c| -%>
+      <li>
+        <div class="leave-type-name"><%= c.name %>-<%= c.code %></div>
+        <div class="leave-type-edit"><%= link_to t("Edit"), {:action => "edit_leave_types", :id=>c.id} %></div>
+        <div class="leave-type-edit"><%= "(Inactive)" unless c.status == true %></div>
+        </li>
+     <% end %>
+
+  <% else %>
+<p class="flash-msg"><%= t 'employee_leave_type_not_found' %></p>
+  <% end %>
+</ul>

@@ -1,0 +1,5 @@
+<h4>删除学生记录成功!</h4>
+<br/>
+<br/>
+<%= link_to " ► 生成TC",
+        {:controller => "student", :action => "generate_tc_pdf", :id => @student.admission_no},:target => '_blank', :class=> 'user_button' %>

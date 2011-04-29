@@ -1,0 +1,14 @@
+<ul id="department-list">
+  <% unless @departments.empty? %>
+    <li class="heading"> 部门名称 </li>
+    <% @departments.each do |d| %>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="department-name"><%= d.name %>(<%= d.code %>)</div>
+        <div class="department-edit"><%= link_to t("Edit"), :action => "edit_department", :id=>d.id %></div>
+        <div class="department-edit"><%= link_to t("Delete"), {:action => "delete_department", :id=>d.id}, :confirm => t("Are_you_sure") %></div>
+      </li>
+    <% end %>
+    <% else %>
+    <p class="flash-msg"> 没有找到员工部门.</p>
+  <% end %>
+</ul>

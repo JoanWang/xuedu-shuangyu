@@ -1,0 +1,50 @@
+<div id="content-header">
+  <img src="/images/examination/show_exam.png" alt="Exam" />
+  <h1><%= t 'Exams' %></h1>
+  <h3><%= t 'Home' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <%  if permitted_to? :index,:grading_levels %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Set_grading_level'),:controller=>'grading_levels',:action=>'index' %> </div>
+        <div class="link-descr"><%= t 'Set_descripe' %></div>
+      </div>
+    <% end %>
+    <%  if permitted_to? :create_exam,:exam %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('Exam_manage'),:action=>'create_exam' %>  </div>
+        <div class="link-descr"><%= t 'Exam_manage_descripe' %></div>
+      </div>
+    <% end %>
+    <%  if permitted_to? :create_additional_exam,:additional_exam %>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t('additional_exam'),:controller=>'additional_exam' , :action=>'create_additional_exam' %></div>
+        <div class="link-descr"><%= t 'additional_exam_descripe' %></div>
+      </div>
+    <% end %>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t('exam_wise_report'),:action=>'exam_wise_report' %></div>
+      <div class="link-descr"><%= t 'general_report' %></div>
+    </div>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t('subject_wise_report'),:action=>'subject_wise_report' %> </div>
+      <div class="link-descr"><%= t 'general_subject' %></div>
+    </div>
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t('group_exam'),:action=>'grouped_exam_report' %></div>
+      <div class="link-descr"><%= t 'group_report' %></div>
+    </div>
+    <div class="extender"></div>
+  </div>
+</div>
+

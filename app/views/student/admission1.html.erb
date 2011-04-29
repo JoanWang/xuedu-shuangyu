@@ -1,0 +1,230 @@
+
+<div id="content-header">
+  <img src="/images/admission/admission_page_logo.jpg" />
+  <h1><%= t 'student.Admission' %></h1>
+  <h3><%= t 'student.head' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% if @config.config_value == '0' %>
+  <p class="flash-msg">最后录取的学生学号<%= @last_admitted_student.admission_no %> </p>
+  <% end %>
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <% form_for(@student, :url => {:action=> 'admission1'}, :html=> {:multipart=>true}) do |s| %>
+    <%= error_messages_for 'student', :header_message => nil %>
+
+    <div id="admission1_form">
+
+      <div id="necessary-field-notification"> 输入框标有 <span class="necessary-field">*</span> 为必填项.</div>
+
+      <div id="autofill-area">
+
+        <div class="student_admission_date">
+          <%= s.label :admission_no %><span class="necessary-field">*</span>
+          <div class="text-input-bg-admission">
+            <% unless @config.config_value == '0' or @last_admitted_student.nil? %>
+              <%= s.text_field :admission_no , :value=> @last_admitted_student.admission_no.next%>
+              <% else %>
+              <%= s.text_field :admission_no %>
+              <% end %>
+          </div>
+        </div>
+        
+        <div class="student_admission_date">
+          <%= s.label :admission_date %><span class="necessary-field">*</span>
+          <div class="text-input-bg-admission">
+            <%= calendar_date_select_tag 'student[admission_date]', Date.today,
+              :year_range => 15.years.ago..5.years.from_now %>
+          </div>
+        </div>
+
+      </div>
+
+      <span class="span-sub-heading"><%= t 'student.person_detail' %></span>
+      <hr class="sub-heading"></hr>
+
+      <div class="label-field-pair">
+        <%= s.label :first_name %><span class="necessary-field">*</span>
+        <div class="text-input-bg"><%= s.text_field :first_name %></div>
+      </div>
+
+      <hr class="label-underline"></hr>
+
+      <div class="label-field-pair">
+        <%= s.label :middle_name %>
+        <div class="text-input-bg"><%= s.text_field :middle_name %></div>
+      </div>
+
+      <hr class="label-underline"></hr>
+
+      <div class="label-field-pair">
+        <%= s.label :last_name %>
+        <div class="text-input-bg"><%= s.text_field :last_name %></div>
+      </div>
+
+      <hr class="label-underline"></hr>
+
+      <div id="admission1_form_vertical_block_left">
+
+        <div class="label-field-pair">
+          <%= s.label :batch_id %>
+          <div class="text-input-bg"><%= select :student, :batch_id, Batch.active.map {|b| [b.full_name, b.id]} %></div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :date_of_birth %><span class="necessary-field">*</span>
+          <div class="text-input-bg">
+            <%= calendar_date_select_tag 'student[date_of_birth]',
+              Date.today - 5.years, :year_range => 40.years.ago..0.years.ago %>
+          </div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label_field_pair">
+          <%= s.label :gender %>
+          <label class="label_for_gender" for="student_gender_true">男</label>
+          <%= s.radio_button  "gender", "m", :checked => "checked" %>
+          <label class="label_for_gender" for="student_gender_false">女</label>
+          <%= s.radio_button  "gender", "f" %>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :blood_group%>
+          <div class="text-input-bg"><%= select :student, :blood_group, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"] %></div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :birth_place %>
+          <div class="text-input-bg"><%= s.text_field :birth_place %></div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :nationality_id %>
+          <div class="text-input-bg">
+            <%= select :student, :nationality_id, Country.all.map {|c| [c.name, c.id]}, :selected => 76 %>
+          </div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :language %>
+          <div class="text-input-bg"><%= s.text_field :language %></div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :category %>
+          <div class="text-input-bg"><%= s.select :student_category_id, StudentCategory.all.map {|c| [c.name, c.id]}, { :prompt => 'Select category' } %></div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :religion %>
+          <div class="text-input-bg"><%= s.text_field :religion %></div>
+        </div>
+
+      </div>
+
+      <div id="admission1_form_vertical_block_right">
+        <span class="span-sub-heading"><%= t 'student.contact_detail' %></span>
+        <hr class="sub-heading"></hr>
+        <div class="label-field-pair">
+          <%= s.label :address_line1 %>
+          <div class="text-input-bg"><%= s.text_field :address_line1 %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :address_line2 %>
+          <div class="text-input-bg"><%= s.text_field :address_line2 %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :city %>
+          <div class="text-input-bg"><%= s.text_field :city %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :state %>
+          <div class="text-input-bg"><%= s.text_field :state %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :pin_code %>
+          <div class="text-input-bg"><%= s.text_field :pin_code %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :country_id %>
+          <div class="text-input-bg"> <%= select :student, :country_id, Country.all.map {|c| [c.name, c.id]}, :selected=> 76 %> </div>
+        </div>
+
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :phone1 %>
+          <div class="text-input-bg"><%= s.text_field :phone1 %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :phone2 %>
+          <div class="text-input-bg"><%= s.text_field :phone2 %></div>
+        </div>
+        <hr class="label-underline"></hr>
+
+        <div class="label-field-pair">
+          <%= s.label :email %>
+          <div class="text-input-bg"><%= s.text_field :email %></div>
+        </div>
+        <% if @application_sms_enabled.is_enabled == true %>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <%= s.label :is_sms_enabled %>
+          <div class="text-input-bg"><%= s.check_box :is_sms_enabled %></div>
+        </div>
+        <% end %>
+        <br/>
+        <script>
+          (function($){$.fn.filestyle=function(options){var settings={width:250};if(options){$.extend(settings,options);};return this.each(function(){var self=this;var wrapper=$("<div>").css({"width":settings.imagewidth+"px","height":settings.imageheight+"px","background":"url("+settings.image+") 0 0 no-repeat","background-position":"right","display":"inline","position":"absolute","overflow":"hidden"});var filename=$('<input class="file">').addClass($(self).attr("class")).css({"display":"inline","width":settings.width+"px"});$(self).before(filename);$(self).wrap(wrapper);$(self).css({"position":"relative","height":settings.imageheight+"px","width":settings.width+"px","display":"inline","cursor":"pointer","opacity":"0.0"});if($.browser.mozilla){if(/Win/.test(navigator.platform)){$(self).css("margin-left","-142px");}else{$(self).css("margin-left","-168px");};}else{$(self).css("margin-left",settings.imagewidth-settings.width+"px");};$(self).bind("change",function(){filename.val($(self).val());});});};})(jQuery);
+        </script>
+        <span class="span-sub-heading"><%= t 'student.upload_photo'%></span>
+        <hr class="sub-heading"></hr>
+        <div class="label-field-pair">
+          <%= s.label :image_file %>
+          <div class="text-input-bg"><%= s.file_field :image_file %></div>
+
+        </div>
+      </div>
+      <div class="extender">
+
+      </div>
+    </div>
+
+    <%= submit_tag "", :value => "► 保存 & 继续前进", :class => "submit_button" %>
+  <% end %>
+
+</div>

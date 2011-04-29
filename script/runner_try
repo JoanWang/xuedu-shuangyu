@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+#while oracle connect error,retry
+require File.dirname(__FILE__) + '/../config/boot'
+code = ARGV[0]
+begin
+  p "=== runner_try ===="
+  require 'commands/runner'
+rescue
+  30.times do |i|
+    begin
+      puts "\n"
+      p "=== #{code} try#{i}... ===="
+      eval(code)
+      break
+    rescue
+      puts "=== error:#{$!} ===="
+      p "=== sleeping... ===="
+      sleep 2
+    end
+  end
+  p "== ok =="
+end

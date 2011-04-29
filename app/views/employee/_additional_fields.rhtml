@@ -1,0 +1,16 @@
+<ul id="category-list">
+<% unless @additional_details.empty? %>
+  <li class="heading"> 字段名 </li>
+    <%- @additional_details.each do |c| -%>
+      <li class="list<%=cycle('odd', 'even')%>">
+        <div class="category-name"><%= c.name %></div>
+        <div class="category-edit"><%= link_to t("Edit"), {:action => "edit_additional_details", :id=>c.id} %></div>
+        <div class="category-edit"><%= link_to t("Delete"), {:action => "delete_additional_details", :id=>c.id}, :confirm => t("Are_you_sure") %></div>
+      </li>
+     <% end %>
+
+  <% else %>
+<p class="flash-msg">没有额外信息相关记录.</p>
+  <% end %>
+</ul>
+

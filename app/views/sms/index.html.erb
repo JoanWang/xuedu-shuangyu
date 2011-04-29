@@ -1,0 +1,50 @@
+<div id="content-header">
+  <img src="/images/show_news/show_news_logo.png" alt="" />
+  <h1><%= t 'SMS' %></h1>
+  <h3><%= t 'Home' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <div class="box">
+     <div class="link-box">
+      <div class="link-heading"><%= link_to t('SMS_setting'),:action=>'settings' %></div>
+      <div class="link-descr"><%= t 'SMS_setting_page' %></div>
+    </div>
+<% if @sms_setting.application_sms_active %>
+     <div class="link-box">
+      <div class="link-heading"><%= link_to t('SMS_to_student'),:action=>'students'%></div>
+      <div class="link-descr"><%= t 'Send_SMS_to_stu' %></div>
+    </div>
+     <div class="link-box">
+      <div class="link-heading"><%= link_to t('SMS_to_batch'),:action=>'batches'%></div>
+      <div class="link-descr"><%= t 'Send_SMS_to_batch'%></div>
+    </div>
+     <div class="link-box">
+      <div class="link-heading"><%= link_to t('SMS_to_employee'),:action=>'employees'%></div>
+      <div class="link-descr"><%= t 'Send_SMS_to_employ' %></div>
+    </div>
+     <div class="link-box">
+      <div class="link-heading"><%= link_to t('SMS_to_employee_dep'),:action=>'departments'%></div>
+      <div class="link-descr"><%= t 'Send_SMS_to_employ_dep' %></div>
+    </div>
+     <div class="link-box">
+      <div class="link-heading"><%= link_to_remote t('SMS_to_all'),:url=>{:action=>'all'} %></div>
+      <div class="link-descr"><%= t('Send_SMS_to_all') %></div>
+    </div>
+
+<% end %>
+<div id="sms-box" >
+
+</div>
+    <%= image_tag("loader2.gif",
+      :align => "absmiddle",
+      :border => 0,
+      :id => "loader",
+      :style =>"display: none;" ) %>
+
+
+</div>
+</div>

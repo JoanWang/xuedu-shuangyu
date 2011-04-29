@@ -1,0 +1,63 @@
+<div id="content-header">
+  <img src="/images/show_timetable.png" />
+  <h1><%= t 'Timetable' %></h1>
+  <h3><%= t 'Home' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <%if permitted_to? :edit,:timetable%>
+      <div class="link-box">
+        <% @config = Configuration.available_modules %>
+        <% if @config.include?('HR') %>
+          <div class="link-heading"><%= link_to t("Create_timetable"), :action => "select_class2" %></div>
+        <% else %>
+          <div class="link-heading"><%= link_to t("Create_timetable"), :action => "select_class" %></div>
+        <% end %>
+        <div class="link-descr"><%= t 'Create_descrip' %></div>
+      </div>
+
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t("Set_timing"), :controller => "class_timings", :action => "index"   %></div>
+        <div class="link-descr"><%= t 'Create_descrip' %></div>
+      </div>
+    <%  end%>
+
+    <%  if permitted_to? :view,:timetable%>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t("View_timetables"), :action => "view" %></div>
+        <div class="link-descr"><%= t 'View_descrip' %></div>
+      </div>
+
+    <%  end%>
+    <%  if permitted_to? :edit,:timetable%>
+      <% @config = Configuration.get_config_value('StudentAttendanceType') %>
+      <% if @config == 'SubjectWise' %>
+        <div class="link-box">
+          <div class="link-heading"><%= link_to t("Swap_class"), :action => "extra_class" %></div>
+          <div class="link-descr"><%= t 'Swap_descrip' %></div>
+        </div>
+      <%  end %>
+    <%  end %>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t("Institutional_timetable"), :action => "timetable" %></div>
+      <div class="link-descr"><%= t 'View_entire' %></div>
+    </div>
+    <%  if permitted_to? :edit,:timetable%>
+      <div class="link-box">
+        <div class="link-heading"><%= link_to t("Create_weekday"), :controller => "weekday", :action => "index" %></div>
+        <div class="link-descr"><%= t 'Create_weekday' %></div>
+      </div>
+    <% end %>
+    <div class="extender"></div>
+  </div>
+</div>

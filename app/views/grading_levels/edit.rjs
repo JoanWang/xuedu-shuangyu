@@ -1,0 +1,2 @@
+page.replace_html 'modal-box', :partial => 'edit'
+page << "Modalbox.show($('modal-box'), {title: '编辑等级水平', width: 500 });"

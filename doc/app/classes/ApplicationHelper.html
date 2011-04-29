@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: ApplicationHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">ApplicationHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/helpers/application_helper_rb.html">
+                app/helpers/application_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000735">currency</a>&nbsp;&nbsp;
+      <a href="#M000732">get_stylesheets</a>&nbsp;&nbsp;
+      <a href="#M000733">observe_fields</a>&nbsp;&nbsp;
+      <a href="#M000734">shorten_string</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000735" class="method-detail">
+        <a name="M000735"></a>
+
+        <div class="method-heading">
+          <a href="#M000735" class="method-signature">
+          <span class="method-name">currency</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000735-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000735-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 36</span>
+36:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">currency</span>
+37:     <span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">find_by_config_key</span>(<span class="ruby-value str">&quot;CurrencyType&quot;</span>).<span class="ruby-identifier">config_value</span>
+38:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000732" class="method-detail">
+        <a name="M000732"></a>
+
+        <div class="method-heading">
+          <a href="#M000732" class="method-signature">
+          <span class="method-name">get_stylesheets</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000732-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000732-source">
+<pre>
+   <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 2</span>
+2:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">get_stylesheets</span>
+3:     <span class="ruby-identifier">stylesheets</span> = [] <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">stylesheets</span>
+4:     [<span class="ruby-node">&quot;#{controller.controller_path}/#{controller.action_name}&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ss</span><span class="ruby-operator">|</span>
+5:       <span class="ruby-identifier">stylesheets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">ss</span>
+6:     <span class="ruby-keyword kw">end</span>
+7:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000733" class="method-detail">
+        <a name="M000733"></a>
+
+        <div class="method-heading">
+          <a href="#M000733" class="method-signature">
+          <span class="method-name">observe_fields</span><span class="method-args">(fields, options)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000733-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000733-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 9</span>
+ 9:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">observe_fields</span>(<span class="ruby-identifier">fields</span>, <span class="ruby-identifier">options</span>)
+10:           <span class="ruby-identifier">with</span> = <span class="ruby-value str">&quot;&quot;</span>                          <span class="ruby-comment cmt">#prepare a value of the :with parameter</span>
+11:           <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">field</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">fields</span>
+12:                   <span class="ruby-identifier">with</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;'&quot;</span>
+13:                   <span class="ruby-identifier">with</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot;&amp;&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">field</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">first</span>
+14:                   <span class="ruby-identifier">with</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">field</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;='+escape($('&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">field</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;').value)&quot;</span>
+15:                   <span class="ruby-identifier">with</span> <span class="ruby-operator">+=</span> <span class="ruby-value str">&quot; + &quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">field</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">last</span>
+16:           <span class="ruby-keyword kw">end</span>
+17: 
+18:           <span class="ruby-identifier">ret</span> = <span class="ruby-value str">&quot;&quot;</span>;      <span class="ruby-comment cmt">#generate a call of the observer_field helper for each field</span>
+19:           <span class="ruby-keyword kw">for</span> <span class="ruby-identifier">field</span> <span class="ruby-keyword kw">in</span> <span class="ruby-identifier">fields</span>
+20:                   <span class="ruby-identifier">ret</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">observe_field</span>(<span class="ruby-identifier">field</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>( { <span class="ruby-identifier">:with</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">with</span> }))
+21:           <span class="ruby-keyword kw">end</span>
+22:           <span class="ruby-identifier">ret</span>
+23:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000734" class="method-detail">
+        <a name="M000734"></a>
+
+        <div class="method-heading">
+          <a href="#M000734" class="method-signature">
+          <span class="method-name">shorten_string</span><span class="method-args">(string, count)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000734-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000734-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 25</span>
+25:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shorten_string</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">count</span>)
+26:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">count</span>
+27:       <span class="ruby-identifier">shortened</span> = <span class="ruby-identifier">string</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">count</span>]
+28:       <span class="ruby-identifier">splitted</span> = <span class="ruby-identifier">shortened</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp re">/\s/</span>)
+29:       <span class="ruby-identifier">words</span> = <span class="ruby-identifier">splitted</span>.<span class="ruby-identifier">length</span>
+30:       <span class="ruby-identifier">splitted</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">words</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>].<span class="ruby-identifier">join</span>(<span class="ruby-value str">&quot; &quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">' ...'</span>
+31:     <span class="ruby-keyword kw">else</span>
+32:       <span class="ruby-identifier">string</span>
+33:     <span class="ruby-keyword kw">end</span>
+34:   <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

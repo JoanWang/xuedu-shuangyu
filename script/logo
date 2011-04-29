@@ -1,0 +1,47 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'RMagick'
+
+ENV['RAILS_ENV'] ||= 'development'
+require File.dirname(__FILE__) + '/../config/boot'
+require RAILS_ROOT + '/config/environment'
+
+#此文件用于生成背景图中的文字
+sub_title = '罗湖区'
+title = System.label
+code = System.code
+code = "#{code}-" unless code.empty?
+
+
+head_bg_name = "blank-head_bg.jpg"
+login_bg_name = "blank-login-bg.jpg"
+path = File.dirname(__FILE__) + '/../public/resources/images/'
+head_bg_path = File.join(path, head_bg_name)
+login_bg_path = File.join(path, login_bg_name)
+logo = Magick::Image.read(head_bg_path).first
+login = Magick::Image.read(login_bg_path).first
+
+#登录后显示的背景图
+gc = Magick::Draw.new
+gc.stroke('transparent')
+gc.fill('#0A860C').font(File.join(path, "simhei.ttf")).font_weight('bold')
+
+gc.pointsize(32)
+gc.text(25, 68, title)
+
+gc.pointsize(24)
+gc.text(28, 35, sub_title)
+
+gc.draw(logo)
+logo.write(File.join(path, "#{code}head_bg.jpg"))
+
+#登录的背景图
+gc = Magick::Draw.new
+gc.stroke('transparent')
+gc.fill('#0A860C').font(File.join(path, "simhei.ttf")).font_weight('bold')
+
+gc.pointsize(24)
+gc.text(70, 42, "#{sub_title}#{title}")
+
+gc.draw(login)
+login.write(File.join(path, "#{code}login-bg.jpg"))

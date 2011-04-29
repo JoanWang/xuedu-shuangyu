@@ -1,0 +1,45 @@
+<div id="content-header">
+    <img src="/images/show_settings.png" />
+  <h1><%= t 'School' %></h1>
+  <h3><%= t 'Show' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+<div id="inner-tab-menu">
+  <ul>
+    <li><%= link_to t('New'), new_school_classroom_path(@school) %> </li>
+        <% if permitted_to? :edit, :school %>
+    <li><%= link_to t('Edit'), edit_school_path(@school) if permitted_to? :edit, :school %></li>
+        <%  end %>
+    <% if permitted_to? :destroy, :school %>
+      <li><%= link_to(t('Delete'), school_path(@school), :method => 'delete', :confirm => 'Are you sure?') %></li>
+    <%  end %>
+  </ul>
+</div>
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div class="box">
+        <div class="bread_crumb">
+        <%= link_to t('School'), schools_path %> &raquo;
+        <%= @school.full_name %>
+        </div>
+
+
+    <ul id="category-list">
+
+      <% @classrooms.each do |classroom| %>
+        <li class="list<%=cycle('odd', 'even')%>">
+          <div class="category-name"><%= link_to classroom.full_name, [@school, classroom] %></div>
+          <div class="category-edit"><%= link_to t('Edit'), edit_school_classroom_path(@school, classroom) if permitted_to? :edit, :classrooms %></div>
+          <div class="category-delete"><%= link_to(t('Delete'), [@school, classroom], :method => 'delete', :confirm => t('Are_you_sure'))  if permitted_to? :destroy, :classrooms %></div>
+        </li>
+      <% end %>
+
+    </ul>
+
+    <div class="extender"></div>
+  </div>
+</div>

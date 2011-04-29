@@ -1,0 +1,34 @@
+<div id="content-header">
+  <img src="/images/student_details/student_details_logo.jpg" />
+  <h1>Subject info</h1>
+  <h3>Subject Details</h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <div id="new_profile_info_top">
+    <div class="profile_top_banner"><%= image_tag "master_student/profile/topbanner.png" %></div>
+    <div class="profile_info_label_top"> Name </div>
+    <div class="profile_info_text_top">
+      <%= @subject.name %>
+    </div>
+
+    <div class="profile_info_label_top2"> Code </div>
+    <div class="profile_info_text_top2"><%= @subject.code %></div>
+
+    <div class="profile_info_label_top"> Max_weekly_classes </div>
+    <div class="profile_info_text_top"><%= @subject.max_weekly_classes %></div>
+
+    <div class="profile_info_label_top"> No_exams </div>
+    <div class="profile_info_text_top"><%= @subject.YN_as_text %></div>
+
+    <div class="profile_info_label_top"> No_classroom </div>
+    <div class="profile_info_text_top"><%= @subject.YN_as_text %></div>
+
+    <div class="profile_info_label_top"> School&&Classroom</div>
+    <div class="profile_info_text_top"><%= @subject.classroom.full_name %></div>
+  </div>
+</div>

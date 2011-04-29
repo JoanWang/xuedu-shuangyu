@@ -1,0 +1,27 @@
+<% unless @bank_details.empty? %>
+
+  <% @bank_details.each do |b| %>
+    <%  code = cycle('', '2') %>
+
+    <div class="new_profile_info_area1">
+      <div class="profile_info_label_top<%= code %>"><%= b.bank_field.name %></div>
+      <div class="profile_info_text_top<%= code %>"> <%= b.bank_info %> </div>
+    </div>
+  <% end %>
+  <div class="extender"></div>
+  <div class="edit-pdf-group">
+    <% if permitted_to? :edit3,:employee %>
+      <div class="edit">
+        <%= link_to "► 编辑",   :controller => "employee", :action => "edit3", :id =>@employee.id %>
+      </div>
+    <%end%>
+    <% if permitted_to?  :profile_pdf , :employee %>
+  <div class="pdf">
+    <%= link_to " ► PDF报告",
+      {:controller => "employee", :action => "profile_pdf", :id => @employee.id},:target => '_blank', :class=> 'user_button' %>
+  </div>
+  <% end %>
+  </div>
+<% else %>
+  <p class="flash-msg">没有<%= @employee.first_name%>的银行信息. <%= link_to t("Add"), :controller => "employee", :action => "edit3", :id => @employee.id %></p>
+<% end %>

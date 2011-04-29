@@ -1,0 +1,10 @@
+<div class="label-field-pair"><label>
+  <%= t 'Select_a_month'%>:
+</label>
+<div class="text-input-bg2">
+<%= select :advance_search, :month,
+  [['一月','01'], ['二月','02'], ['三月','03'], ['四月','04'], ['五月','05'], ['六月','06'], ['七月','07'], ['八月','08'], ['九月','09'], ['十月','10'], ['十一月','11'], ['十二月','12']],
+  {:prompt => '月份'} %>
+</div>
+<div id="year"><%= render :partial => 'year' %></div>
+</div>

@@ -1,0 +1,5 @@
+<% unless @options.blank? %>
+  <%= select_tag "subject[classroom_id]", options_for_select(@options), {} %>
+<% else %>
+  <%= select_tag "subject[classroom_id]", options_for_select([[""]]), {} %>
+<% end %>

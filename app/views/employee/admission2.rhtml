@@ -1,0 +1,143 @@
+<div id="content-header">
+ <img src="/images/HR/show_hr.png" alt="" />
+  <h1><%= t 'Employee_admission' %></h1>
+  <h3><%= t 'Step_2' %></h3>
+<div id="app-back-button">
+<%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+</div>
+</div>
+
+<div id="page-yield">
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+
+<% form_for :employee do |a| %>
+  <%= error_messages_for 'employee' %>
+    <div id="form-contents">
+        <span class="span-sub-heading">家庭地址</span>
+    <hr class="sub-heading"></hr>
+
+        <div class="label-field-pair">
+          <label>家庭地址1</label>
+          <div class="text-input-bg"><%= a.text_field :home_address_line1 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>家庭地址2</label>
+          <div class="text-input-bg"><%= a.text_field :home_address_line2 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>家庭所在城市</label>
+          <div class="text-input-bg"><%= a.text_field :home_city %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>家庭所在州</label>
+          <div class="text-input-bg"><%= a.text_field :home_state %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>家庭所在国家</label>
+          <div class="text-input-bg"><%= select :employee, :home_country_id, @countries.map {|c| [c.name, c.id]}, :selected => 36 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>PIN码</label>
+          <div class="text-input-bg"><%= a.text_field :home_pin_code %></div>
+          <div class="extender"></div>
+        </div>
+      <br/>
+        <span class="span-sub-heading">公司地址</span>
+      <hr class="sub-heading"></hr>
+
+        <div class="label-field-pair">
+          <label>公司地址1</label>
+          <div class="text-input-bg"><%= a.text_field :office_address_line1 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>公司地址2</label>
+          <div class="text-input-bg"><%= a.text_field :office_address_line2 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>公司所在城市</label>
+          <div class="text-input-bg"><%= a.text_field :office_city %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>公司所在州</label>
+          <div class="text-input-bg"><%= a.text_field :office_state %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>公司所在国家</label>
+          <div class="text-input-bg"><%= select :employee, :office_country_id, @countries.map {|c| [c.name, c.id]}, :selected => 36 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>公司PIN码</label>
+          <div class="text-input-bg"><%= a.text_field :office_pin_code %></div>
+          <div class="extender"></div>
+        </div>
+      <br/>
+        <span class="span-sub-heading"><%= t 'student.contact_detail' %></span>
+    <hr class="sub-heading"></hr>
+
+        <div class="label-field-pair">
+          <label>办公电话1</label>
+          <div class="text-input-bg"><%= a.text_field :office_phone1 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>办公电话2</label>
+          <div class="text-input-bg"><%= a.text_field :office_phone2 %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>手机号码</label>
+          <div class="text-input-bg"><%= a.text_field :mobile_phone %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>家庭电话</label>
+          <div class="text-input-bg"><%= a.text_field :home_phone %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>电子邮箱</label>
+          <div class="text-input-bg"><%= a.text_field :email %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <div class="label-field-pair">
+          <label>传真</label>
+          <div class="text-input-bg"><%= a.text_field :fax %></div>
+          <div class="extender"></div>
+        </div>
+    </div>
+
+  <div class="save-proceed-button">
+    <%= submit_tag "", :value => "► 保存 & 继续前进" %>
+  </div>
+<% end %>
+
+</div>

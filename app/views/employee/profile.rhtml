@@ -1,0 +1,122 @@
+<% current_username = @current_user.username %>
+<% profile_employee_no = @employee.employee_number %>
+
+<div id="content-header">
+  <img src="/images/HR/show_hr.png" alt="" />
+  <h1><%= t 'Employee_profile' %></h1>
+  <h3><%= t 'Details' %></h3>
+  <div id="app-back-button">
+   <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+
+<div id="nav">
+  <ul>
+    <li>
+      <a href="#" class="drops" id="link_one">简介 &#9660;</a>
+      <ul id="box_one" class="scriptaculously" style="display:none;">
+        <li><%= link_to_remote t("General"), :url => {:action => "profile_general", :id => @employee.id}, :update => "profile-infos" %></li>
+        <li><%= link_to_remote t("Personal"), :url => {:action => "profile_personal", :id => @employee.id}, :update => "profile-infos" %></li>
+        <li><%= link_to_remote t("Address"), :url => {:action => "profile_address", :id => @employee.id}, :update => "profile-infos" %></li>
+        <li><%= link_to_remote t("Contact"), :url => {:action => "profile_contact", :id => @employee.id}, :update => "profile-infos" %></li>
+        <li><%= link_to_remote t("Bank_info"), :url => {:action => "profile_bank_details", :id => @employee.id}, :update => "profile-infos" %></li>
+        <li><%= link_to_remote t("Additional_info"), :url => {:action => "profile_additional_details", :id => @employee.id}, :update => "profile-infos" %></li>
+      </ul>
+    </li>
+
+    <% if current_username == profile_employee_no %>
+      <li>
+        <a href="#" class="drops" id="link_two">薪水 &#9660;</a>
+        <ul id="box_two" class="scriptaculously" style="display:none;">
+          <li><%= link_to_remote t("Payroll"), :url => {:action => "profile_payroll_details", :id => @employee.id}, :update => "profile-infos" %></li>
+          <li><%= link_to_remote t("Payslip"), :url => {:action => "view_payslip", :id => @employee.id}, :update => "profile-infos" %></li>
+        </ul>
+      </li>
+    <%else%>
+      <% if permitted_to? :payslip, :employee %>
+        <li>
+          <a href="#" class="drops" id="link_two">薪水 &#9660;</a>
+          <ul id="box_two" class="scriptaculously" style="display:none;">
+            <li><%= link_to_remote t("Payroll"), :url => {:action => "profile_payroll_details", :id => @employee.id}, :update => "profile-infos" %></li>
+            <li><%= link_to_remote t("Payslip"), :url => {:action => "view_payslip", :id => @employee.id}, :update => "profile-infos" %></li>
+          </ul>
+        </li>
+      <%end%>
+    <%end%>
+
+
+    <% if current_username == profile_employee_no %>
+      <li>
+        <a href="#" class="drops" id="link_three">离职 &#9660;</a>
+        <ul id="box_three" class="scriptaculously" style="display:none;">
+          <li><%= link_to_remote t("Attendance"), :url => {:action => "view_attendance", :id => @employee.id}, :update => "profile-infos" %></li>
+          <li><%= link_to        t("Leaves"), :controller=>"employee_attendance", :action=>"leaves", :id=>@employee.id %></li>
+        </ul>
+      </li>
+    <% else %>
+      <% if permitted_to? :employee_attendance, :employee %>
+        <li>
+          <a href="#" class="drops" id="link_three">离职 &#9660;</a>
+          <ul id="box_three" class="scriptaculously" style="display:none;">
+            <li><%= link_to_remote t("Attendance"), :url => {:action => "view_attendance", :id => @employee.id}, :update => "profile-infos" %></li>
+          </ul>
+        </li>
+
+      <%end%>
+    <%end%>
+
+    <% if permitted_to? :timetable, :employee %>
+      <li><%= link_to        t("Timetable"), :controller=>"employee", :action=>"timetable", :id=>@employee.id %></li>
+    <%end%>
+
+    <% if current_username == profile_employee_no %>
+      <% if @new_reminder_count.size == 0 %>
+        <li><%= link_to        t("Reminder"), :controller=>"reminder", :action=>"index"%></li>
+      <% else %>
+        <li><%= link_to        "提醒(#{@new_reminder_count.size})", :controller=>"reminder", :action=>"index"%></li>
+      <% end %>
+    <%end%>
+      <% if @current_user.admin? %>
+    <li>
+      <%= link_to t("Delete"),:action=>'remove',:id=>@employee.id %>
+    </li>
+      <% end %>
+  </ul>
+
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div id="employee_profile_heading">
+
+    <div id="profile_picture_display">
+      <% unless @employee.photo_data.blank? %>
+        <img src="<%= url_for(:controller=>"employee", :action => "show", :id => @employee.id) %>"  />
+      <% else %>
+        <%= image_tag "HR/default_employee.png" %>
+      <% end %>
+    </div>
+
+    <div id ="employee_main_info">
+      <h3> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
+      <h4> 员工号: <%= @employee.employee_number %> </h4>
+    </div>
+
+    <div id="profile-general-info">
+
+    </div>
+    <div class="extender"></div>
+
+  </div>
+
+  <div id="profile-infos">
+    <%=   render :partial => "general" %>
+
+  </div>
+    <div class="extender"> </div>
+</div>

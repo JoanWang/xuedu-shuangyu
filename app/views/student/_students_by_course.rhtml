@@ -1,0 +1,53 @@
+
+<div class="students-table">
+  <table align="center" width="100%" cellpadding="1" cellspacing="1">
+    <tr class="tr-head">
+      <td>
+        <%= tt('student.s1_no')%>
+      </td>
+      <td>
+        <%= tt('student.name')%>
+      </td>
+      <td>
+        <%= tt('student.admission_no')%>
+      </td>
+      <td>
+        
+      </td>
+    </tr>
+    <tr>
+      <td>
+
+      </td>
+      <td>
+
+      </td>
+      <td>
+        
+      </td>
+      <td>
+
+      </td>
+    </tr>
+    
+    <% @students.each_with_index do |r, i| %>
+      <tr class="tr-<%= cycle('odd', 'even') %>">
+        <td class="col-1">
+          <%= i+1 %>
+        </td>
+
+        <td class="col-2">
+          <%=  r.first_name + " " + r.last_name %>
+        </td>
+        
+        <td class="col-3">
+          <%= r.admission_no %>
+        </td>
+
+        <td class="col-4">
+          <%=  link_to t('View_profile'), :controller => "student", :action => "profile", :id => r.id %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>

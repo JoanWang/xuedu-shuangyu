@@ -1,0 +1,39 @@
+<div id="content-header">
+   <img src="/images/HR/show_hr.png" alt="" />
+   <h1><%= t 'Employee_admission' %></h1>
+   <h3><%= t 'Step_4' %></h3>
+<div id="app-back-button">
+   <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+</div>
+</div>
+
+<div id="page-yield">
+
+<% unless flash[:notice].nil? %>
+<p class="flash-msg"> <%= flash[:notice] %> </p>
+<% end %>
+
+
+<% form_for :employee_additional_details do |a| %>
+<%= error_messages_for 'employee_bank_details' %>
+
+    <div id="form-contents">
+      <span class="span-sub-heading"><%= t 'Additional_info' %></span>
+      <hr class="sub-heading"></hr>
+        <% @additional_fields.each do |additional| %>
+        <div class="label-field-pair">
+          <label><%= additional.name %></label>
+          <div class="text-input-bg"><%= a.text_field :additional_info,:index => additional.id %></div>
+          <div class="extender"></div>
+        </div>
+        <hr class="label-underline"></hr>
+        <% end %>
+    </div>
+
+  <div class="save-proceed-button">
+    <%= submit_tag "", :value =>"► 保存 & 继续前进" %>
+  </div>
+<% end %>
+
+
+</div>

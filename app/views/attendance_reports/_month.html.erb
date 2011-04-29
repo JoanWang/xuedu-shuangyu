@@ -1,0 +1,14 @@
+<div class="label-field-pair"><label>
+  <%= t 'Select_a_month' %>:
+</label>
+<div class="text-input-bg2">
+<%= select :month, :id,
+  [['一月','01'], ['二月','02'], ['三月','03'], ['四月','04'], ['五月','05'], ['六月','06'], ['七月','07'], ['八月','08'], ['九月','09'], ['十月','10'], ['十一月','11'], ['十二月','12']],
+  {:prompt => '选择一个月份'},
+  {:onchange => "#{remote_function(
+  :url => { :action => 'year' },
+  :with => "'month='+value+'&batch_id='+#{@batch.id}+'&subject_id='+#{@subject}",
+  :before => "Element.show('loader')",
+  :success => "Element.hide('loader')"  )}"} %>
+</div>
+<div id="year"><%= render :partial => 'year' %></div></div>

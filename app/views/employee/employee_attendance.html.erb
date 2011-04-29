@@ -1,0 +1,32 @@
+<div id="content-header">
+   <img src="/images/attendence/attendence.png" alt="" />
+   <h1><%= t 'Manage_attendance' %></h1>
+   <h3><%= t 'Leave_and_attendance' %></h3>
+  <div id="app-back-button">
+   <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+  <div id="box">
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t("Add_leave_type"), :controller=>"employee_attendance", :action=>"add_leave_types"%></div>
+      <div class="link-descr"><%= t 'Add_type_descript' %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t("Attendance_register"), :controller=>"employee_attendances", :action=>"index"%></div>
+      <div class="link-descr"><%= t 'Attendance_descript' %></div>
+    </div>
+
+    <div class="link-box">
+      <div class="link-heading"><%= link_to t("Attendance_report"), :controller=>"employee_attendance", :action=>"report" %></div>
+      <div class="link-descr"><%= t 'Attendance_report_des' %></div>
+    </div>
+  </div>
+
+</div>

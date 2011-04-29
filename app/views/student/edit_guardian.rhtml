@@ -1,0 +1,120 @@
+
+<div id="content-header">
+  <img src="/images/admission/admission_page_logo.jpg" />
+  <h1><%= t 'guardian.parent_info' %></h1>
+  <h3><%= t 'guardian.edit_guardian_detail' %></h3>
+    <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %> <p class="flash-msg"> <%= flash[:notice] %> </p> <% end %>
+
+  <% form_for :guardian do |s| %>
+
+    <div id="admission1_form">
+
+
+
+      <div class="label-field-pair">
+        <%= s.label :ward%>
+        <div class="text_display"><%= @student.admission_no %></div>
+        <%= s.hidden_field :ward_id, :value => @student.id %>
+      </div>
+      <br/>
+      <span class="span-sub-heading"><%= t 'guardian.parent_detail'%></span>
+      <hr class="sub-heading"></hr>
+
+      <div class="label-field-pair">
+        <%= s.label :first_name %>
+        <div class="text-input-bg"><%= s.text_field :first_name, :value => @parent.first_name %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :last_name %>
+        <div class="text-input-bg"><%= s.text_field :last_name, :value => @parent.first_name %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :relation %>
+        <div class="text-input-bg"><%= s.text_field :relation, :value => @parent.relation %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :date_of_birth %>
+        <div class="text-input-bg"><%= calendar_date_select_tag 'parent_detail[dob]', @parent.dob,:year_range => 60.years.ago..20.years.ago %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :education%>
+        <div class="text-input-bg"><%= s.text_field :education, :value => @parent.education %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :occupation %>
+        <div class="text-input-bg"><%= s.text_field :occupation, :value => @parent.occupation %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :income %>
+        <div class="text-input-bg"><%= s.text_field :income, :value => @parent.income %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :email %>
+        <div class="text-input-bg"><%= s.text_field :email, :value => @parent.email %></div>
+      </div>
+      <br/>
+      <span class="span-sub-heading"><%= t 'guardian.contact_detail' %></span>
+      <hr class="sub-heading"></hr>
+      <div class="label-field-pair">
+        <%= s.label :office_address_line1 %>
+        <div class="text-input-bg"><%= s.text_field :office_address_line1, :value => @parent.office_address_line1 %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_address_line2 %>
+        <div class="text-input-bg"><%= s.text_field :office_address_line2, :value => @parent.office_address_line2 %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :city %>
+        <div class="text-input-bg"><%= s.text_field :city, :value => @parent.city %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :state %>
+        <div class="text-input-bg"><%= s.text_field :state, :value => @parent.state %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :country %>
+        <div class="text-input-bg"> <%= select :parent_detail, :country_id, @countries.map {|c| [c.name, c.id]}, :selected => @parent.country.id %> </div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_phone1 %>
+        <div class="text-input-bg"><%= s.text_field :office_phone1, :value => @parent.office_phone1 %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :office_phone2 %>
+        <div class="text-input-bg"><%= s.text_field :office_phone2, :value => @parent.office_phone2 %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <%= s.label :mobile_phone %>
+        <div class="text-input-bg"><%= s.text_field :mobile_phone, :value => @parent.mobile_phone %></div>
+      </div>
+
+    </div>
+
+    <div class="extender">
+    </div>
+
+    <%= submit_tag "",  :name => "commit", :class => "submit_button3", :value => "► 更新" %>
+  <% end %>
+
+</div>

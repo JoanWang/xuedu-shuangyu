@@ -1,0 +1,286 @@
+<div id="content-header">
+   <img src="/images/student_details/student_details_logo.jpg" />
+  <h1><%= t 'Students' %></h1>
+  <h3><%= t 'advance_search' %></h3>
+  <div id="app-back-button">
+   <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+  <% unless flash[:notice].nil? %>
+  <div class="show-msg"><div class="flash-msg"><%= flash[:notice] %></div> </div>
+  <% end %>
+  <div id="search-form">
+    <% form_for @search do |f| %>
+      <div class="label-field-pair">
+        <label for="name"><%=tt('guardian.name')%></label>
+        <div class="text-input-bg">
+          <%= f.text_field :first_name_or_middle_name_or_last_name_like %>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <label for="student_admission_no"><%=tt('student.admission_no')%></label>
+        <div class="text-input-bg">
+          <%= f.text_field :admission_no_equals %>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <label for="student_course">课程<%= image_tag("loader.gif",
+            :align => "absmiddle",
+            :border => 0,
+            :id => "loader",
+            :style =>"display: none;" ) %></label>
+        <div class="text-input-bg">
+          <%= select :advv_search, :course_id, Course.all.map{|c| [c.course_name+" "+c.section_name, c.id]},
+            {:prompt=>t('Select_a_course')},
+            {:onChange => "#{remote_function(:url => {:action => "list_batches"},
+            :with => "'course_id='+value",
+            :before => "Element.show('loader')",
+            :success => "Element.hide('loader')"
+            )}"}%>
+
+        </div>
+      </div>
+      <div class="label-field-pair" id="course_batches">
+        <label for="student_batch">期次</label>
+        <div class="text-input-bg" >
+          <%= select :search,:batch_id_equals,@batches.map{|c| [c.name, c.id]},{:prompt=>t('Select_a_batch')}%>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <label for="student_category"><%=tt('student.category')%></label>
+        <div class="text-input-bg">
+          <%= f.collection_select :student_category_id_equals,StudentCategory.all,:id,:name,{:prompt=>t('Select_a_catetory')}%>
+        </div>
+      </div>
+      <div class="label_field_pair">
+        <label class="label_for_student" for="student_gender"><%=tt('student.gender')%></label>
+        <div class="student_gender_value">
+          <label class="label_for_gender" for="student_gender_true">全部</label>
+          <%= f.radio_button  :gender_equals, "" %>
+          <label class="label_for_gender" for="student_gender_false">男</label>
+          <%= f.radio_button  :gender_equals, "m"%>
+          <label class="label_for_gender" for="student_gender_false">女</label><%= f.radio_button  :gender_equals, "f" %>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <label for="student_blood_group"><%=tt('student.blood_group')%></label>
+        <div class="text-input-bg">
+          <%= select :search, :blood_group_like, ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"],{:prompt=>"请选择"}%>
+        </div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="student_country">
+          <%=tt('student.country_id')%> 
+        </label>
+        <div class="text-input-bg">
+          <%= f.collection_select :nationality_id_equals, Country.all,:id,:name,{:prompt=>"请选择"}%>
+        </div>
+      </div>
+
+      <div class="label-field-pair">
+        <label for="student_grade"><%=tt('student.admission_date')%></label>
+        <div class="text-input-bg">
+          <%= select :advv_search,:doa_option,["等于","小于","大于"],{:prompt=>"请选择"},
+            {:onChange => "#{remote_function(:url => {:action => "list_doa_year"},
+            :with=>"'doa_option='+value",
+            :before => "Element.show('loader')",
+            :success => "Element.hide('loader')"
+            )}"}
+        %>
+          <%= image_tag("loader.gif",
+            :align => "absmiddle",
+            :border => 0,
+            :id => "loader",
+            :style =>"display: none;" ) %>
+          <div id="doa_year">
+            <%= select :advv_search,:doa_year,[],{:prompt=>"请选择"} %>
+          </div>
+          <div id="doa_year_hidden"></div>
+        </div>
+      </div>
+      <div class="label-field-pair">
+        <label for="student_birth_date"><%=tt('student.date_of_birth')%></label>
+        <div class="text-input-bg">
+          <%= select :advv_search,:dob_option,["等于","小于","大于"],{:prompt=>"请选择"},
+            {:onChange => "#{remote_function(:url => {:action => "list_dob_year"},
+            :with=>"'dob_option='+value",
+            :before => "Element.show('loader')",
+            :success => "Element.hide('loader')",
+            :class=>'small-box'
+            )}"}
+        %>
+          <%= image_tag("loader.gif",
+            :align => "absmiddle",
+            :border => 0,
+            :id => "loader",
+            :style =>"display: none;" ) %>
+          <div id="dob_year">
+            <%= select :advv_search,:dob_year,[],{:prompt=>"请选择"} %>
+          </div>
+          <div id="dob_year_hidden"></div>
+        </div>
+      </div>
+      <div class="label_field_pair">
+        <label class="label_for_student" for="student_gender"><%=tt('student.status')%></label>
+        <div class="student_gender_value">
+          <label class="label_for_gender" for="student_gender_true">在校</label>
+          <%= f.radio_button  :is_active_equals, "true", {:checked => 'checked'} %>
+          <label class="label_for_gender" for="student_gender_false">往界</label>
+          <%= f.radio_button  :is_active_equals, "false" %>
+          <label class="label_for_gender" for="student_gender_false">全部</label>
+          <%= f.radio_button  :is_active_equals, "", {:checked => false} %>
+        </div>
+      </div>
+
+      <%= f.submit "", :value => "查询", :class=>'submit' %>
+    <% end %>
+  </div>
+  <% unless @students.nil? %>
+    <script type="text/javascript">
+      Event.observe(window, 'load', function() { $('search-form').hide(); });
+    </script>
+    <div id="search-result">
+
+      <p>你的查询条件为:</p>
+      <div class="search-again">
+        <%#= link_to_function '► Search again' do |page|
+          page.visual_effect :toggle_slide, "search-form"
+          page.hide "search-result"
+        end %>
+
+        <% searched_for = '列出 ' %>
+        <% searched_for += '姓名: ' + params[:search][:first_name_or_middle_name_or_last_name_like].to_s unless params[:search][:first_name_or_middle_name_or_last_name_like].empty? %>
+        <% searched_for += ' 学号: ' + params[:search][:admission_no_equals].to_s unless params[:search][:admission_no_equals].empty? %>
+        <% unless params[:advv_search][:course_id].empty? %>
+          <% course = Course.find(params[:advv_search][:course_id]) %>
+          <% batch = Batch.find(params[:search][:batch_id_equals]) %>
+          <% searched_for += ' 课程: ' + course.full_name %>
+          <% searched_for += ' 期次: ' + batch.full_name %>
+        <% end %>
+        <% searched_for += ' 学生分类: ' + StudentCategory.find(params[:search][:student_category_id_equals]).name.to_s unless params[:search][:student_category_id_equals].empty? %>
+        <% unless  params[:search][:gender_equals].empty? %>
+          <% if  params[:search][:gender_equals] == 'm' %>
+            <% searched_for += " 性别: 男" %>
+          <% elsif  params[:search][:gender_equals] == 'f' %>
+            <% searched_for += " 性别: 女" %>
+          <% else %>
+            <% searched_for += " 性别: 全部" %>
+          <% end %>
+        <% end %>
+        <% searched_for += ' 血型: ' + params[:search][:blood_group_like].to_s unless params[:search][:blood_group_like].empty? %>
+        <% searched_for += ' 国籍: ' + Country.find(params[:search][:nationality_id_equals]).name.to_s unless params[:search][:nationality_id_equals].empty? %>
+        <% searched_for += ' 入学时间: ' +  params[:advv_search][:doa_option].to_s + ' '+ params[:adv_search][:admission_date_year].to_s unless  params[:advv_search][:doa_option].empty? %>
+        <% searched_for += ' 出生日期: ' +  params[:advv_search][:dob_option].to_s + ' ' + params[:adv_search][:birth_date_year].to_s unless  params[:advv_search][:dob_option].empty? %>
+        <% if params[:search][:is_active_equals]=="true" %>
+          <% searched_for += " 在校生" %>
+          <% elsif params[:search][:is_active_equals]=="false" %>
+          <% searched_for += " 往届生" %>
+          <% else %>
+          <% searched_for += " 全部学生" %>
+        <% end %>
+
+
+        <%= link_to "► 重新查询", {:action=>"advanced_search"}%>
+        <% unless @students.empty? %>
+          <%= link_to "► 查看PDF报告",   {:action => "advanced_search_pdf",:for =>searched_for, :result=>@students,:search=> params[:search],:status=>params[:search][:is_active_equals], :format => 'pdf'}, :target => '_blank' , :class=> 'submit_button' %>
+        <% end %>
+      </div>
+      <div class="extender"></div>
+      <div class="searched_for">
+        
+        <% unless params[:search][:first_name_or_middle_name_or_last_name_like].empty? %>
+          <span>姓名:</span> <%= params[:search][:first_name_or_middle_name_or_last_name_like] %>
+        <% end %>
+        <% unless  params[:search][:admission_no_equals].empty? %>
+          <span>学号:</span><%= params[:search][:admission_no_equals] %>
+        <% end %>
+        <% unless params[:advv_search][:course_id].empty? %>
+          <% course = Course.find(params[:advv_search][:course_id]) %>
+          <% batch = Batch.find(params[:search][:batch_id_equals]) %>
+          <span>课程:</span> <%= course.full_name %>
+
+          <span>期次: </span> <%= batch.full_name %>
+        <% end %>
+        <% unless  params[:search][:student_category_id_equals].empty? %>
+          <% category = StudentCategory.find(params[:search][:student_category_id_equals]) %>
+          <span> 学生分类: </span> <%= category.name %>
+        <% end %>
+        <% unless  params[:search][:gender_equals].empty? %>
+          <% if  params[:search][:gender_equals] == 'm' %>
+            <span> 性别: </span> 男 
+          <% elsif  params[:search][:gender_equals] == 'f' %>
+            <span> 性别: </span> 女 
+          <% else %>
+            <span> 性别: </span> 全部 
+          <% end %>
+        <% end %>
+        <% unless  params[:search][:blood_group_like].empty? %>
+          <span> 血型:</span> <%= params[:search][:blood_group_like] %>
+        <% end %>
+        <% unless  params[:search][:nationality_id_equals].empty? %>
+          <% nationality = Country.find(params[:search][:nationality_id_equals]) %>
+          <span> 国籍: </span> <%= nationality.name %>
+        <% end %>
+        <% unless  params[:advv_search][:doa_option].empty? %>
+          <span> 入学时间: </span> <%= params[:advv_search][:doa_option] %>
+
+          <%= params[:adv_search][:admission_date_year] %>
+        <% end %>
+        <% unless  params[:advv_search][:dob_option].empty? %>
+          <span>出生日期: </span> <%= params[:advv_search][:dob_option] %>
+
+          <%= params[:adv_search][:birth_date_year] %>
+        <% end %>
+        <% if params[:search][:is_active_equals]=="true" %>
+          <span> 在校生 </span>
+          <% elsif params[:search][:is_active_equals]=="false" %>
+          <span> 往届生 </span>
+          <% else %>
+          <span> 全部 </span>
+        <% end %>
+
+      </div>
+
+      <table id="listing" align="center" width="100%" cellpadding="1" cellspacing="1">
+        <tr class="tr-head">
+          <td>
+            <%=tt 'student.s1_no'%>
+          </td>
+          <td>
+            <%= order @search, :by => :first_name, :as => tt('student.first_name') %>
+          </td>
+          <td> 期次</td>
+          <td> 学号</td>
+
+        </tr>
+        <tr class="tr-blank"></tr>
+        <% @students.each_with_index do |student, i| %>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+            <td class="col-1"><%= i+1 %></td>
+            <%  if  student.is_active %>
+            <td class="col-2"><%=  link_to student.full_name, :controller => 'student', :action => 'profile', :id => student.id%></td>
+            <% else  %>
+                        <td class="col-2"><%=  link_to student.full_name, :controller => 'archived_student', :action => 'profile', :id => student.id%></td>
+                        <% end %>
+                        <td class="col-2"><%= student.batch.full_name %></td>
+            <td class="col-2"><%= student.admission_no %></td>
+          </tr>
+        <% end %>
+        <% if @students.empty? %>
+          <tr class="tr-<%= cycle('odd', 'even') %>">
+     
+            <td class="col-1"></td>
+            <td class="col-2">没有找到相关学生记录.</td>
+          </tr>
+        <% end %>
+      </table>
+      <div class="extender">
+
+      </div>
+    </div>
+  <% end %>
+
+</div>

@@ -1,0 +1,20 @@
+<div id="content-header">
+   <img src="/images/student_details/student_details_logo.jpg" />
+  <h1><%= t 'Students' %></h1>
+  <h3><%= t 'delete_student' %></h3>
+  <div id="app-back-button">
+      <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <div id="delete-student">
+    <h4><%= t 'delete_student' %></h4>
+    <p><%= t 'delete_descripe' %></p>
+
+    <p class="warning"><%= t 'Warning'%></p>
+    <%= link_to "► 删除", { :action => 'destroy', :id =>params[:id]}, :confirm => 'Are you completely sure?', :class=> 'user_button' %>
+  </div>
+
+</div>

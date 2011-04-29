@@ -1,0 +1,2 @@
+page.replace_html 'modal-box', :partial => 'edit'
+page << "Modalbox.show($('modal-box'), {title: '编辑课目', width: 500});"

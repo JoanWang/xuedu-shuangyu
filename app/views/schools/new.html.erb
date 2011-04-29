@@ -1,0 +1,62 @@
+<div id="content-header">
+  <img src="/images/examination/show_exam.png" alt="Exam" />
+  <h1><%= t 'School' %></h1>
+  <h3><%= t 'New' %></h3>
+  <div id="app-back-button">
+    <%= link_to_function image_tag("/images/buttons/back.png",:border => 0), "history.back()" %>
+  </div>
+</div>
+
+<div id="page-yield">
+
+  <% unless flash[:notice].nil? %>
+    <p class="flash-msg"> <%= flash[:notice] %> </p>
+  <% end %>
+
+  <div class="box">
+    <div class="bread_crumb">
+      <%= link_to t('School'), schools_path%> &raquo;
+      <%= t 'New' %>
+    </div>
+
+    <% form_for setup_compus(@school) do |f| %>
+
+      <%= error_messages_for :school %>
+
+      <div class="label-field-pair">
+        <div class="label-container"><%= f.label :school_name %></div>
+        <div class="input-container"><%= f.text_field :school_name %></div>
+      </div>
+
+      <div class="label-field-pair">
+        <div class="label-container"><%= f.label :school_code %></div>
+        <div class="input-container"><%= f.text_field :school_code %></div>
+      </div>
+
+      <h4><%= t 'init_classroom' %></h4>
+
+      <% f.fields_for :classrooms do |classroom_form| %>
+
+        <div class="label-field-pair">
+          <div class="label-container"><%= classroom_form.label :name %></div>
+          <div class="input-container"><%= classroom_form.text_field :name %></div>
+        </div>
+
+        <div class="label-field-pair">
+          <div class="label-container"><%= classroom_form.label :code %></div>
+          <div class="input-container"><%= classroom_form.text_field :code %></div>
+        </div>
+
+        <div class="label-field-pair">
+          <div class="label-container"><%= classroom_form.label :seats %></div>
+          <div class="input-container"><%= classroom_form.text_field :seats %></div>
+        </div>
+
+      <% end %>
+      <%= submit_tag "", :value => "► 保存", :class => "submit_button" %>
+
+    <% end %>
+
+    <div class="extender"></div>
+  </div>
+</div>

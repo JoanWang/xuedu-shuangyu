@@ -1,0 +1,40 @@
+<label class="head_label">新增班级时间
+  <span>
+    <% if @batch.nil?%>
+      <%= t "Common" %>
+    <% else %>
+      <%=  @batch.full_name %>
+    <% end %>
+  </span></label>
+<div id="ajax-create">
+  <% form_remote_for :class_timing,
+    :url => { :action => 'create'} do |f| %>
+
+    <% batch_id = (@batch.nil? ? nil : @batch.id) %>
+    <%= f.hidden_field :batch_id, :value => batch_id %>
+  <div id="form-errors"></div>
+
+    <div class="label-field-pair">
+      <%= f.label :name %>
+      <div class="input-field"><%= f.text_field :name %></div>
+    </div>
+
+    <div class="label-field-pair">
+      <%= f.label :start_time %>
+      <div class="time-select-field"><%= time_select :class_timing, :start_time, {:minute_step => 5} %></div>
+    </div>
+
+    <div class="label-field-pair">
+      <%= f.label :end_time %>
+      <div class="time-select-field"><%= time_select :class_timing, :end_time, {:minute_step => 5} %></div>
+    </div>
+
+    <div class="label-checkbox-pair">
+      <%= f.check_box :is_break, :checked => false %>
+      <%= f.label :is_break %>
+    </div>
+
+    <%= f.submit '', :value =>'► 保存', :class => 'submit-button' %>
+
+  <% end %>
+</div>

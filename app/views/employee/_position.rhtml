@@ -1,0 +1,15 @@
+
+<ul id="position-list">
+<% unless @positions.empty? %>
+  <li class="heading"> 职位名称 </li>
+<% @positions.each do |p| %>
+  <li class="list<%=cycle('odd', 'even')%>">
+    <div class="position-name"><%= p.name %>(<%= p.employee_category.prefix unless p.employee_category_id.nil? %>)</div>
+    <div class="position-edit"><%= link_to t("Edit"), :action => "edit_position", :id=>p.id %></div>
+    <div class="position-edit"><%= link_to t("Delete"), {:action => "delete_position", :id=>p.id}, :confirm =>t("Are_you_sure") %></div>
+  </li>
+<% end %>
+<% else %>
+<p class="flash-msg"> 没有员工职位相关记录.</p>
+<% end %>
+</ul>

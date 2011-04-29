@@ -1,0 +1,2 @@
+page.replace_html 'modal-box', :partial => 'new'
+page << "Modalbox.show($('modal-box'), {title: '添加新等级水平', width: 500});"

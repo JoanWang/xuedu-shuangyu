@@ -1,0 +1,38 @@
+<label class="head_label">编辑班级时间
+  <span>
+    <% if @batch.nil?%>
+      <%= t "Common" %>
+    <% else %>
+      <%=  @batch.full_name %>
+    <% end %>
+  </span></label>
+
+<div id="ajax-edit">
+
+  <% form_remote_for @class_timing do |f| %>
+    <div id="form-errors"></div>
+
+    <div class="label-field-pair">
+      <%= f.label :name %>
+      <div class="text-input-bg"><%= f.text_field :name %></div>
+    </div>
+
+    <div class="label-field-pair">
+      <%= f.label :start_time %>
+      <div class="time-select-field"><%= time_select :class_timing, :start_time, {:minute_step => 5} %></div>
+    </div>
+
+    <div class="label-field-pair">
+      <%= f.label :end_time %>
+      <div class="time-select-field"><%= time_select :class_timing, :end_time, {:minute_step => 5} %></div>
+    </div>
+
+    <div class="label-checkbox-pair">
+      <%= f.check_box :is_break, :checked => false %>
+      <%= f.label :is_break %>
+    </div>
+
+    <%= submit_tag '', :value => '► 更新', :class => 'submit-button' %>
+
+  <% end %>
+</div>
