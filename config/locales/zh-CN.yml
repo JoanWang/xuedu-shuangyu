@@ -338,6 +338,7 @@ zh-CN:
   Select_a_subject: "选择一个课目"
 
   login:
+    Language: "语言"
     Username: "用户名"
     Password: "密  码"
     Remember_me: "记住我"

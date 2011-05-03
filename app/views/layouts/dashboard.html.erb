@@ -67,9 +67,6 @@
             :id => this_user.username %> &nbsp;|&nbsp;
             <%= link_to t('Messages'),:controller => "reminder", :action => "index" %>(<%= render  :partial => 'layouts/reminder_count' %>)&nbsp;|&nbsp;
           <%= link_to t('Log_out'), :controller => 'user', :action => 'logout' %>  &nbsp;&nbsp;
-          <% form_tag '', :method => 'GET' do %>
-            <%= select_tag "语言", options_for_select(LANGUAGES, I18n.locale), :onchange => "this.form.submit()" %>  &nbsp;&nbsp;
-          <% end %>
         </div>
       </div>
     </div>

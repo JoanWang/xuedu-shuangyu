@@ -17,6 +17,8 @@
     <% form_for :user do |form| %>
 
       <div id="login_area">
+        <label for="username"><%= t 'login.Language' %>   :       <%= select_tag 'locale', options_for_select(LANGUAGES, I18n.locale), :onchange => 'this.form.submit()' %></label>
+
         <label for="username"><%= t 'login.Username' %></label>
         <div id="username_textbox_bg">
           <%= form.text_field :username,
