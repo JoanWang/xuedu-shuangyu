@@ -102,3 +102,87 @@ en-GB:
     Daily: "Daily"
     SubjectWise: "SubjectWise"
     Settings_has_been_saved: "Settings has been saved"
+  user:
+    user_type1: "Admin"
+    user_type2: "Employee"
+    user_type3: "Student"
+
+
+  msg:
+    no_right: "对不起,你没有权限访问此页面."
+    no_view: "你没有权限查看这条消息."
+    denied: "访问被拒绝!"
+    must_fill: "请填写所有的必填字段."
+    transfer: "转移学生成功."
+    graduation: "选择毕业学生成功."
+    invalid_param: "无效的参数."
+    approve: "工资单已获批准."
+    paid: "费用已支付."
+    continue: "选择一个期次并继续."
+    sorry: "对不起,没有向领导报告你不能申请休假.请联系管理员."
+
+    create:
+      success: "{{model}} account created!"
+      failure: "{{model}} account not created!"
+    update:
+      success: "{{model}} account updated!"
+      failure: "{{model}}."
+    save:
+      success: "{{model}}保存成功."
+      failure: "{{model}}保存失败."
+      student_success: "{{model}}记录保存成功.请填写家长资料."
+    delete:
+      success: "{{model}} account deleted!"
+      failure: "{{model}}."
+      denied: "不能删除!"
+      unable: "<p>不能删除.请先删除存在的期次和学生信息.</p>"
+      school_unable: "<p>不能删除. 请先删除已存在的教室.</p>"
+    course:
+      success: "年级创建成功."
+      update_sucess: "年级更新成功."
+      delete: "年级删除成功."
+    batch:
+      unable_delete: "<p>不能删除. 请先删除所有的学生信息.</p>"
+      unable_delete_1: "<p>不能删除. 请先删除所有的课目信息.</p>"
+    student:
+      additional_save: "附加信息保存成功."
+      additional_update: "附加信息更新成功."
+      delete_success: "删除成功."
+      unable_delete: "不能删除."
+      update: "学生记录更新成功."
+      parent_update: "家长记录更新成功."
+      guardians_delete: "监护人删除成功."
+    school:
+    classroom:
+      unable_delete: "<p>不能删除教室.请先删除与之关联的所有课目.</p>"
+    configuration:
+      invalid: "无效的延伸.图片必须为.JPG格式."
+      too_large: "文件太大.文件大小不大于1MB."
+    user:
+      success: "Password succesfully reset. Use new password to log in."
+      failure: "<p>Password confirmation failed. Please try again.</p>"
+      update: "Password has been updated successfully!"
+      password_change: "Password changed successfully."
+      old_failure: "<p>The old password you entered is incorrect. Please enter valid password.</p>"
+      not_blank: "<p>Password fields cannot be blank!</p>"
+      profile: "User profile not found."
+      reset_time: "Reset time expired."
+      reset_and_email: "Reset Password link emailed to "
+      no_email: "No user exists with email address "
+      invalid: "Invalid reset link."
+      invalid_link: "You have followed an invalid link. Please try again."
+      role_update: "Role updated."
+    employee:
+      leave_tpye: "员工休假类型保存成功."
+      update: "休假类型更新成功."
+      register: "出勤登记成功."
+      success: "休假申请成功."
+      delete: "删除休假申请."
+    event:
+      create: "成功为选中的课程创建活动."
+      depart: "成功为选中的部门创建活动."
+      cancel: "创建的活动已取消."
+    timetable:
+      weekdays: "你已经设置平日."
+      publish: "时间表已公布."
+      

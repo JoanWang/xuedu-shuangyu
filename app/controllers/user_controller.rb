@@ -15,14 +15,14 @@ class UserController < ApplicationController
   end
   
   def list_user
-    if params[:user_type] == '管理员'
+    if params[:user_type] == t('user.user_type1')
       @users = User.find(:all, :conditions => {:admin => true}, :order => 'first_name ASC')
       render(:update) do |page|
         page.replace_html 'users', :partial=> 'users'
         page.replace_html 'employee_user', :text => ''
         page.replace_html 'student_user', :text => ''
       end
-    elsif params[:user_type] == '员工'
+    elsif params[:user_type] == t('user.user_type2')
       render(:update) do |page|
         hr = Configuration.find_by_config_value("HR")
         unless hr.nil?
@@ -36,7 +36,7 @@ class UserController < ApplicationController
           page.replace_html 'student_user', :text => ''
         end
       end
-    elsif params[:user_type] == '学生'
+    elsif params[:user_type] == t('user.user_type3')
       render(:update) do |page|
         page.replace_html 'student_user', :partial=> 'student_user'
         page.replace_html 'users', :text => ''
@@ -175,10 +175,10 @@ class UserController < ApplicationController
         user.role = user.role_name
         user.save(false)
         UserNotifier.deliver_forgot_password(user)
-        flash[:notice] = "重置密码并emailed到 #{user.email}"
+        flash[:notice] = "#{t('msg.user.reset_and_email')}#{user.email}"
         redirect_to :action => "index"
       else
-        flash[:notice] = "此email地址#{params[:reset_password][:email]}不存在相应的用户."
+        flash[:notice] = "#{t('msg.user.no_email')}#{params[:reset_password][:email]}"
       end
     end
   end
@@ -190,7 +190,7 @@ class UserController < ApplicationController
       user = User.find_by_username @user.username
       if user and User.authenticate?(@user.username, @user.password)
         session[:user_id] = user.id
-        flash[:notice] = "欢迎你, #{user.first_name} #{user.last_name}!"
+        flash[:notice] = "#{t('Welcome')}, #{user.first_name} #{user.last_name}!"
         redirect_to :controller => 'user', :action => 'dashboard'
       else
         flash[:notice] = t 'login.Invalid_username_or_password_combination'

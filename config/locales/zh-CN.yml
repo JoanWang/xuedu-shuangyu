@@ -377,6 +377,10 @@ zh-CN:
     Daily: "按天记"
     SubjectWise: "按课目记"
     Settings_has_been_saved: "设置已保存"
+  user:
+    user_type1: "管理员"
+    user_type2: "员工"
+    user_type3: "学生"
   name: "名称"
   student:
     Categories: "分类"
@@ -707,6 +711,7 @@ zh-CN:
     paid: "费用已支付."
     continue: "选择一个期次并继续."
     sorry: "对不起,没有向领导报告你不能申请休假.请联系管理员."
+
     create:
       success: "新增{{model}}成功."
       failure: "新增{{model}}失败."
@@ -753,6 +758,8 @@ zh-CN:
       not_blank: "<p>密码不能为空!</p>"
       profile: "找不到用户简介."
       reset_time: "重置次数已过期."
+      reset_and_email: "重置密码并emailed到 "
+      no_email: "没有用户存在此email地址 "
       invalid: "无效的重置链接."
       invalid_link: "你跟随了无效的链接.请重试."
       role_update: "角色更新成功."
