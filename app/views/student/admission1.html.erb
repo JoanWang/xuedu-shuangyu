@@ -92,9 +92,9 @@
 
         <div class="label_field_pair">
           <%= s.label :gender %>
-          <label class="label_for_gender" for="student_gender_true">男</label>
+          <label class="label_for_gender" for="student_gender_true"><%= t 'enum.male' %></label>
           <%= s.radio_button  "gender", "m", :checked => "checked" %>
-          <label class="label_for_gender" for="student_gender_false">女</label>
+          <label class="label_for_gender" for="student_gender_false"><%= t 'enum.female' %></label>
           <%= s.radio_button  "gender", "f" %>
         </div>
 

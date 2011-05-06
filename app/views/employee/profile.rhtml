@@ -104,7 +104,7 @@
 
     <div id ="employee_main_info">
       <h3> <%= @employee.first_name %> <%= @employee.middle_name %> <%= @employee.last_name %>  </h3>
-      <h4> 员工号: <%= @employee.employee_number %> </h4>
+      <h4> <%= tt('employee.employee_number') %> <%= @employee.employee_number %> </h4>
     </div>
 
     <div id="profile-general-info">

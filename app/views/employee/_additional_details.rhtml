@@ -12,12 +12,12 @@
   <div class="edit-pdf-group">
     <% if permitted_to? :edit3_1,:employee %>
       <div class="edit">
-        <%= link_to "► 编辑",   :controller => "employee", :action => "edit3_1", :id =>@employee.id %>
+        <%= link_to "► #{t('Edit')}",   :controller => "employee", :action => "edit3_1", :id =>@employee.id %>
       </div>
     <%end%>
     <% if permitted_to?  :profile_pdf , :employee %>
   <div class="pdf">
-    <%= link_to " ► PDF报告",
+    <%= link_to " ► #{t('PDF_report')}",
       {:controller => "employee", :action => "profile_pdf", :id => @employee.id},:target => '_blank', :class=> 'user_button' %>
   </div>
   <% end %>

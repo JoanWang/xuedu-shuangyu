@@ -150,8 +150,6 @@ zh-CN:
   SubjectWise: "课目结果"
   Detailed_report: "详细报告"
   Archives: "档案"
-  Add_additional_detail: "新增附加内容"
-  Edit_additional_detail: "编辑附加内容"
   No_details: "没有找到相关的附加内容"
   Field_name: "字段名"
 
@@ -311,6 +309,7 @@ zh-CN:
   All: "全选"
   None: "不选"
   Apply: "申请"
+  PDF_report: "PDF报告"
   Change_type: "修改类型"
   My_leaves: "我的休假"
   All_leaves: "全部休假"
@@ -382,6 +381,9 @@ zh-CN:
     user_type1: "管理员"
     user_type2: "员工"
     user_type3: "学生"
+  enum:
+    male: "男"
+    female: "女"
   name: "名称"
   student:
     Categories: "分类"
@@ -534,11 +536,11 @@ zh-CN:
         name: "姓名"
         role: "角色"
         email: "电子邮箱"
-        old_password: "原密码"
-        new_password: "新密码"
-        confirm_password: "确认新密码"
+        old_password: "原密码:"
+        new_password: "新密码:"
+        confirm_password: "确认新密码:"
       employee:
-        employee_number: "员工号"
+        employee_number: "员工号:"
         joining_date: "入职时间"
         first_name: "名字"
         middle_name: "中间名"
@@ -618,10 +620,10 @@ zh-CN:
         percentage: "百分数"
         status: "状态"
       apply_leave:
-        employee_leave_types_id: "休假类型"
-        is_half_day: "是否为半天"
-        start_date: "开始时间"
-        end_date: "结束时间"
+        employee_leave_types_id: "休假类型:"
+        is_half_day: "是否为半天?"
+        start_date: "开始时间:"
+        end_date: "结束时间:"
         reason: "原因"
       news:
         title: "标题"
@@ -629,6 +631,7 @@ zh-CN:
       grading_level:
         name: "名称"
         min_score: "最低分"
+        min_score_descript: "此等级最低分"
       exam:
         subject_name: "课目名称"
         maximum_marks: "最高分"
@@ -672,6 +675,7 @@ zh-CN:
         too_long: "过长（最长为 {{count}} 个字符）"
         too_short: "过短（最短为 {{count}} 个字符）"
         wrong_length: "长度非法（必须为 {{count}} 个字符）"
+        taken: "已经被使用"
         not_a_number: "不是数字"
         not_an_integer: "必须是整数"
         greater_than: "必须大于 {{count}}"
@@ -681,7 +685,6 @@ zh-CN:
         less_than_or_equal_to: "必须小于或等于 {{count}}"
         odd: "必须为单数"
         even: "必须为双数"
-        taken: "已经被使用"
         record_invalid: "校验失败: {{errors}}"
 
   support:

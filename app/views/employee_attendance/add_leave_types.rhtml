@@ -36,14 +36,14 @@
       <label for="status"><%= tt('employee_leave_type.status') %></label>
         
       <%= c.radio_button  "status", "true", :checked => "checked" %>
-      <label class="label_for_status" for="add_grade_status_true">激活</label>
+      <label class="label_for_status" for="add_grade_status_true"><%= t 'Activate' %></label>
 
       <%= c.radio_button  "status", "false" %>
-      <label class="label_for_status" for="add_grade_status_false">无效</label>
+      <label class="label_for_status" for="add_grade_status_false"><%= t 'Inactivate' %></label>
     </div>
 
     <div id="submit-button">
-      <%=submit_tag("", :value => "► 创建") %>
+      <%=submit_tag("", :value => "► #{t('Save')}") %>
     </div>
       </div></div>
   <% end %>

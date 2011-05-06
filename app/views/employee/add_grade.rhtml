@@ -18,38 +18,38 @@
     <%= error_messages_for 'grade' %>
 <div id="form-content">
     <div class="label-field-pair">
-      <label for="grade_name">名称</label>
+      <label for="grade_name"><%= c.label :name %></label>
       <div class="text-input-bg"> <%= c.text_field :name %> </div>
     </div>
 
     <div class="label-field-pair">
-      <label for="grade_priority">优先级</label>
+      <label for="grade_priority"><%= c.label :priority %></label>
       <div class="text-input-bg"> <%= c.text_field :priority %> </div>
     </div>
 
     <div class="label-field-pair">
-      <label for="grade_priority">每天最大工时</label>
+      <label for="grade_priority"><%= c.label :max_hours_day %></label>
       <div class="text-input-bg"> <%= c.text_field :max_hours_day %> </div>
     </div>
 
     <div class="label-field-pair">
-      <label for="grade_priority">每周最大工时</label>
+      <label for="grade_priority"><%= c.label :max_hours_week %></label>
       <div class="text-input-bg"> <%= c.text_field :max_hours_week %> </div>
     </div>
 
     <div class="label-checkbox-pair">
-      <label class="status" for="status">状态</label>
+      <label class="status" for="status"><%= c.label :status %></label>
       <div id="radio-buttons">
       <%= c.radio_button  "status", "true", :checked => "checked" %>
-      <label class="label_for_status" for="grade_status_true">有效</label>
+      <label class="label_for_status" for="grade_status_true"><%= t 'Activate' %></label>
 
       <%= c.radio_button  "status", "false" %>
-      <label class="label_for_status" for="grade_status_false">无效</label>
+      <label class="label_for_status" for="grade_status_false"><%= t 'Inactivate' %></label>
     </div>
     </div>
 
     <div id="submit-button">
-      <%=submit_tag("", :value => "► 保存") %>
+      <%=submit_tag("", :value => "► #{t('Save')}") %>
     </div>
 </div>
 
